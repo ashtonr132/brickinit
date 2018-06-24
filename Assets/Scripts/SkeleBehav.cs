@@ -142,17 +142,20 @@ public class SkeleBehav : MonoBehaviour {
     }
     private void CheckState()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) < 1.75f && spawns < 4 && !attackcd)
+        if (player != null)
         {
-            currentstate = State.Attacking;
-        }
-        else if (!attacking && !PlayerControls.firebuffered)
-        {
-            currentstate = State.Defending;
-        }
-        else if(!attacking && !defending)
-        {
-            currentstate = State.Idle;
+            if (Vector2.Distance(player.transform.position, transform.position) < 1.75f && spawns < 4 && !attackcd)
+            {
+                currentstate = State.Attacking;
+            }
+            else if (!attacking && !PlayerControls.firebuffered)
+            {
+                currentstate = State.Defending;
+            }
+            else if (!attacking && !defending)
+            {
+                currentstate = State.Idle;
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

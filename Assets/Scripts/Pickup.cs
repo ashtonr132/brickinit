@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour {
-
+    [SerializeField]
+    GameObject player;
 	// Use this for initialization
 	void Start ()
     {
@@ -13,13 +14,16 @@ public class Pickup : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (PlayerControls.currenthealth == PlayerControls.maxhealth && transform.name.Contains("Health"))
+        if (player != null)
         {
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Player").GetComponent<Collider2D>(), true);
-        }
-        else
-        {
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Player").GetComponent<Collider2D>(), false);
+            if (PlayerControls.currenthealth == PlayerControls.maxhealth && transform.name.Contains("Health"))
+            {
+                Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), player.GetComponent<Collider2D>(), true);
+            }
+            else
+            {
+                Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), player.GetComponent<Collider2D>(), false);
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

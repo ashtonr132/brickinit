@@ -13,8 +13,6 @@ public class TrollBehav : MonoBehaviour {
     private Animator a;
     internal bool attacking = false, attackcd = false, deflecting = false;
     [SerializeField]
-    Sprite s;
-    [SerializeField]
     AudioClip[] deathsounds;
 
     internal enum State
@@ -112,17 +110,20 @@ public class TrollBehav : MonoBehaviour {
     }
     internal void CheckState()
     {
-        if (!attacking && !attackcd && PlayerControls.LastBrick != null && PlayerControls.LastBrick.GetComponent<Rigidbody2D>() != null && !PlayerControls.firebuffered && Vector2.Distance(player.transform.position, transform.position) < 1.5f)
+        if (player != null)
         {
-            currentstate = State.Deflect;
-        }
-        else if (Vector2.Distance(player.transform.position, transform.position) < 1.25f)
-        {
-            currentstate = State.Attack;
-        }        
-        else
-        {
-            currentstate = State.Idle;
+            if (!attacking && !attackcd && PlayerControls.LastBrick != null && PlayerControls.LastBrick.GetComponent<Rigidbody2D>() != null && !PlayerControls.firebuffered && Vector2.Distance(player.transform.position, transform.position) < 1.5f)
+            {
+                currentstate = State.Deflect;
+            }
+            else if (Vector2.Distance(player.transform.position, transform.position) < 1.25f)
+            {
+                currentstate = State.Attack;
+            }
+            else
+            {
+                currentstate = State.Idle;
+            }
         }
     }
     internal IEnumerator Deflect()

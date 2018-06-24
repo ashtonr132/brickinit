@@ -19,13 +19,6 @@ public class Menu : MonoBehaviour {
         print("exitbutton added");
         ExitBut.GetComponent<Button>().onClick.AddListener(delegate { MenuButtons(ExitBut.name); });
     }
-    private void Update()
-    {
-        if (Time.timeScale != 0 && SceneManager.GetActiveScene().name.Contains("Main Menu"))
-        {
-            Time.timeScale = 1;
-        }
-    }
     private void MenuButtons(string buttonname)
     {
         print("button");
@@ -48,7 +41,11 @@ public class Menu : MonoBehaviour {
                 }
                 else
                 {
+                    Time.timeScale = 1;
+                    PlayerControls.currenthealth = PlayerControls.maxhealth; PlayerControls.points = 1000; PlayerControls.lives = 3; PlayerControls.maxhealth = 10;
+                    PlayerControls.invincible = false; PlayerControls.firebuffered = true; PlayerControls.go = false;
                     SceneManager.LoadScene("Main Menu");
+
                 }
                 break;
         }

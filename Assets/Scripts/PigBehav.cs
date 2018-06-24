@@ -104,35 +104,38 @@ public class PigBehav : MonoBehaviour {
 
     private void CheckState()
     {
-        if (currentstate != State.Fleeing)
+        if (Player != null)
         {
-            if (currenthealth == 1 && Vector2.Distance(transform.position, Player.transform.position) < 1f)
+            if (currentstate != State.Fleeing)
             {
-                currentstate = State.Fleeing;
-            }
-            else if (Vector2.Distance(transform.position, Player.transform.position) < 0.225f && Mathf.Abs(transform.position.y - Player.transform.position.y) <= 0.15f && currentstate != State.Charging && currentstate != State.Fleeing) //stood next to me
-            {
-                currentstate = State.Attacking;
-            }
-            else if (Vector2.Distance(transform.position, Player.transform.position) < 1f && Mathf.Abs(transform.position.y - Player.transform.position.y) <= 0.15f) //nearby
-            {
-                currentstate = State.Charging;
+                if (currenthealth == 1 && Vector2.Distance(transform.position, Player.transform.position) < 1f)
+                {
+                    currentstate = State.Fleeing;
+                }
+                else if (Vector2.Distance(transform.position, Player.transform.position) < 0.225f && Mathf.Abs(transform.position.y - Player.transform.position.y) <= 0.15f && currentstate != State.Charging && currentstate != State.Fleeing) //stood next to me
+                {
+                    currentstate = State.Attacking;
+                }
+                else if (Vector2.Distance(transform.position, Player.transform.position) < 1f && Mathf.Abs(transform.position.y - Player.transform.position.y) <= 0.15f) //nearby
+                {
+                    currentstate = State.Charging;
+                }
+                else
+                {
+                    currentstate = State.Idle;
+                }
             }
             else
             {
-                currentstate = State.Idle;
-            }
-        }
-        else
-        {
-            if (!ishealing)
-            {
-                StartCoroutine(Healing());
-            }
-            if (Mathf.Abs(transform.position.x - Player.transform.position.x) > 1.5)
-            {
-                SpawnLocation = transform.position;
-                currentstate = State.Idle;
+                if (!ishealing)
+                {
+                    StartCoroutine(Healing());
+                }
+                if (Mathf.Abs(transform.position.x - Player.transform.position.x) > 1.5)
+                {
+                    SpawnLocation = transform.position;
+                    currentstate = State.Idle;
+                }
             }
         }
     }
