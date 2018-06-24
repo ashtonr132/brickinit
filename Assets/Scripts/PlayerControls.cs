@@ -85,10 +85,10 @@ public class PlayerControls : MonoBehaviour
             {
                 PlayerLives.transform.position = transform.GetChild(1).position;
             }
-            if (currenthealth <= 0 && lives > 0)
+            if (currenthealth <= 0)
             {
                 points -= 100;
-                if (lives > 0)
+                if (lives > 1)
                 {
                     AudioSource.PlayClipAtPoint(deathsounds[Random.Range(0, deathsounds.Length-1)], Camera.main.transform.position, 1);
                     lives--;
@@ -170,7 +170,6 @@ public class PlayerControls : MonoBehaviour
         if (gameObject != null)
         {
             Destroy(gameObject);
-
         }
         yield return new WaitForSeconds(5);
         GameOverHolder.SetActive(true);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraMovement : MonoBehaviour {
 
@@ -15,7 +16,7 @@ public class CameraMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        if (player != null && !SceneManager.GetActiveScene().name.Contains("Boss Fight"))
         {
             if (Vector3.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(player.transform.position.x, player.transform.position.y + cameraoffset)) > 0.01f)
             {

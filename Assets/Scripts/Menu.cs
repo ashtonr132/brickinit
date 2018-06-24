@@ -16,10 +16,19 @@ public class Menu : MonoBehaviour {
             LBut.GetComponent<Button>().onClick.AddListener(delegate { MenuButtons(LBut.name); });
             BBut.GetComponent<Button>().onClick.AddListener(delegate { MenuButtons(BBut.name); });
         }
+        print("exitbutton added");
         ExitBut.GetComponent<Button>().onClick.AddListener(delegate { MenuButtons(ExitBut.name); });
+    }
+    private void Update()
+    {
+        if (Time.timeScale != 0 && SceneManager.GetActiveScene().name.Contains("Main Menu"))
+        {
+            Time.timeScale = 1;
+        }
     }
     private void MenuButtons(string buttonname)
     {
+        print("button");
         switch (buttonname)
         {
             case "Tut":
@@ -32,6 +41,7 @@ public class Menu : MonoBehaviour {
                 SceneManager.LoadScene("Boss Fight");
                 break;
             case "Exit":
+                print("exit");
                 if (SceneManager.GetActiveScene().name.Contains("Main Menu"))
                 {
                     Application.Quit();
