@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Robert Ashton/Documents/GitHub/ESS2/Brick'in it/Build/Build.exe
+C:/Users/Robert Ashton/Documents/GitHub/brickingit/brickinit/Build/Build.exe
 SceneListBegin?
 Assets/Scenes/Main Menu.unity
 Assets/Scenes/Tutorial Level.unity

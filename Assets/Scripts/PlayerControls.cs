@@ -85,13 +85,12 @@ public class PlayerControls : MonoBehaviour
             {
                 PlayerLives.transform.position = transform.GetChild(1).position;
             }
-            if (currenthealth <= 0)
+            if (currenthealth <= 0 && lives > 0)
             {
                 points -= 100;
                 if (lives > 0)
                 {
                     AudioSource.PlayClipAtPoint(deathsounds[Random.Range(0, deathsounds.Length-1)], Camera.main.transform.position, 1);
-
                     lives--;
                     currenthealth = maxhealth;
                     transform.position = spawnpos;
@@ -168,9 +167,13 @@ public class PlayerControls : MonoBehaviour
     internal IEnumerator GameOver()
     {
         go = true;
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+
+        }
         yield return new WaitForSeconds(5);
         GameOverHolder.SetActive(true);
-        Destroy(gameObject);
         SceneManager.LoadScene("Main Menu");
     }
     internal IEnumerator DisplayHPBar()
