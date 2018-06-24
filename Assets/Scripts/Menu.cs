@@ -16,12 +16,10 @@ public class Menu : MonoBehaviour {
             LBut.GetComponent<Button>().onClick.AddListener(delegate { MenuButtons(LBut.name); });
             BBut.GetComponent<Button>().onClick.AddListener(delegate { MenuButtons(BBut.name); });
         }
-        print("exitbutton added");
         ExitBut.GetComponent<Button>().onClick.AddListener(delegate { MenuButtons(ExitBut.name); });
     }
     private void MenuButtons(string buttonname)
     {
-        print("button");
         switch (buttonname)
         {
             case "Tut":

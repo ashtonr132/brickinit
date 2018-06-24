@@ -47,31 +47,31 @@ public class PlayerControls : MonoBehaviour
         Points.GetComponent<Text>().text = points.ToString();
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        firebuffered = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!go) {
-        Points.GetComponent<Text>().text = points.ToString();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!go)
         {
-            if (ExitBut.activeSelf)
+            Points.GetComponent<Text>().text = points.ToString();
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+                if (ExitBut.activeSelf)
+                {
+                    Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+                    AudioSource.PlayClipAtPoint(Resources.Load("Sound Effects/Unpause") as AudioClip, Camera.main.transform.position, 1);
+                    ExitBut.SetActive(false);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(Resources.Load("Sound Effects/Pause") as AudioClip, Camera.main.transform.position, 1);
+                    Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+                    ExitBut.SetActive(true);
+                }
 
-                AudioSource.PlayClipAtPoint(Resources.Load("Sound Effects/Unpause") as AudioClip, Camera.main.transform.position, 1);
-                ExitBut.SetActive(false);
             }
-            else
-            {
-                AudioSource.PlayClipAtPoint(Resources.Load("Sound Effects/Pause") as AudioClip, Camera.main.transform.position, 1);
-                Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-
-                ExitBut.SetActive(true);
-            }
-
-        }
             if (Time.timeScale != 0)
             {
                 if ((isGrounded && Mathf.Abs(rb.velocity.x) > 0.05f) || (animator.enabled && animator.GetCurrentAnimatorStateInfo(0).IsName("CH_Throw")))
@@ -177,8 +177,7 @@ public class PlayerControls : MonoBehaviour
         yield return new WaitForSeconds(5);
         currenthealth = maxhealth; points = 1000; lives = 3; maxhealth = 10;
         invincible = false; firebuffered = true; go = false;
-
-    SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("Main Menu");
     }
     internal IEnumerator DisplayHPBar()
     {
