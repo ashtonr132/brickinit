@@ -163,7 +163,6 @@ public class SkeleBehav : MonoBehaviour {
         if (collision.gameObject.name.Contains("Brick") && !defending)
         {
             AudioSource.PlayClipAtPoint(Resources.Load("Sound Effects/Enemy Hit") as AudioClip, Camera.main.transform.position, 1);
-
             currenthealth -= 2;
         }
     }

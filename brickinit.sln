@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "brickinit", "Assembly-CSharp.csproj", "{9C84BAD8-C0B4-9709-A8A4-4042074B7581}"
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{9C84BAD8-C0B4-9709-A8A4-4042074B7581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "..\UnitTestProject1\UnitTestProject1.csproj", "{9D87FAD0-163D-4E76-9DC0-0631F145B3FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +17,13 @@ Global
 		{9C84BAD8-C0B4-9709-A8A4-4042074B7581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C84BAD8-C0B4-9709-A8A4-4042074B7581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C84BAD8-C0B4-9709-A8A4-4042074B7581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D87FAD0-163D-4E76-9DC0-0631F145B3FF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9D87FAD0-163D-4E76-9DC0-0631F145B3FF}.Release|Any CPU.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4E56030-6510-4A9E-A76C-4AC4086CE77D}
 	EndGlobalSection
 EndGlobal

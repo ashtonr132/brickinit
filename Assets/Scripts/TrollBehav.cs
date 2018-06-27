@@ -73,7 +73,7 @@ public class TrollBehav : MonoBehaviour {
                 default:
                     if (Random.value * 100 > 98)
                     {
-                        rb.velocity = new Vector2(transform.position.x - (spawnlocation.x + Random.Range(-0.6f, 0.6f)), 0);
+                        rb.velocity = new Vector2(transform.position.x - (spawnlocation.x + Random.Range(-0.6f, 0.6f)), 0) * 0.25f;
                     }
                     break;
             }

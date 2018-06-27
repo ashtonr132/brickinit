@@ -1,4 +1,4 @@
-﻿ using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,9 +29,13 @@ public class SorcBehav : MonoBehaviour
     {
         if (Time.timeScale != 0)
         {
-            if (!GetComponent<CapsuleCollider2D>().enabled && (transform.position.x < 2.4f || transform.position.x > 2.4f))
+            if (transform.position.x < -2.7f || transform.position.x > 2.6f)
             {
                 GetComponent<CapsuleCollider2D>().enabled = true;
+            }
+            else
+            {
+                GetComponent<CapsuleCollider2D>().enabled = false;
             }
             if (health < 0)
             {
@@ -58,7 +62,6 @@ public class SorcBehav : MonoBehaviour
         }
         if (rand < 25)
         {
-            GetComponent<CapsuleCollider2D>().enabled = false;
             a.SetTrigger("SlideF");
             yield return new WaitForSeconds(2.8f* waittime);
             if (transform.position.x >= 2.4f)
@@ -73,7 +76,7 @@ public class SorcBehav : MonoBehaviour
 
             }
             a.SetTrigger("SlideB");
-            yield return new WaitForSeconds(2.8f* waittime); GetComponent<CapsuleCollider2D>().enabled = true;
+            yield return new WaitForSeconds(2.8f* waittime);
 
             StartCoroutine(Do(Random.value * 100));
         }
@@ -94,7 +97,8 @@ public class SorcBehav : MonoBehaviour
             GameObject skully;
             for (int i = Random.Range(3, 6); i > 0; i--)
             {
-                skully = Instantiate(skull, t.position, Quaternion.identity); yield return new WaitForSeconds(0.3f);
+                skully = Instantiate(skull, t.position, Quaternion.identity);
+                yield return new WaitForSeconds(0.3f);
                 skully.GetComponent<SkullBehav>().speed = 0.3f;
                 yield return new WaitForSeconds(0.1f*waittime);
             }
@@ -108,7 +112,7 @@ public class SorcBehav : MonoBehaviour
             {
                 GameObject rocky;
                 rocky = Instantiate(rock, new Vector2(GameObject.Find("Rockspawn").transform.position.x + Random.Range(-3f, 3f), 2.5f), Quaternion.identity);
-                rocky.transform.localScale *= 3;
+                rocky.transform.localScale *= 5;
             }
             StartCoroutine(Do(Random.value * 100));
         }

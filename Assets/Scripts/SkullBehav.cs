@@ -6,8 +6,7 @@ public class SkullBehav : MonoBehaviour {
 
     internal int maxhealth = 1, currenthealth;
     internal float speed = 0.175f;
-    GameObject player;
-    GameObject pare;
+    GameObject player, pare;
 	// Use this for initialization
 	void Start ()
     {

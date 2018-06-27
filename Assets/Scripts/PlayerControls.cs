@@ -20,11 +20,13 @@ public class PlayerControls : MonoBehaviour
     private Vector2 spawnpos;
     private Animator animator;
     [SerializeField]
-    internal Sprite[] jump;    
+    internal Sprite[] jump;  
     [SerializeField]
     GameObject Brick, PlayerLives, Points, ExitBut, GameOverHolder;
     [SerializeField]
     AudioClip[] deathsounds;
+    [SerializeField]
+    Sprite[] MouseCursor;
 
 
     static PlayerControls instance;
@@ -35,6 +37,7 @@ public class PlayerControls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Cursor.SetCursor(MouseCursor[0].texture, Vector2.zero, CursorMode.ForceSoftware);
         lives = 3;
         points = 1000;
         rb = GetComponent<Rigidbody2D>();
@@ -70,10 +73,10 @@ public class PlayerControls : MonoBehaviour
                     Time.timeScale = Time.timeScale == 0 ? 1 : 0;
                     ExitBut.SetActive(true);
                 }
-
             }
             if (Time.timeScale != 0)
             {
+
                 if ((isGrounded && Mathf.Abs(rb.velocity.x) > 0.05f) || (animator.enabled && animator.GetCurrentAnimatorStateInfo(0).IsName("CH_Throw")))
                 {
                     animator.enabled = true;
@@ -111,15 +114,26 @@ public class PlayerControls : MonoBehaviour
                         isGrounded = true;
                     }
                 }
-                if (Input.GetKey(KeyCode.A))
+                if (!(SceneManager.GetActiveScene().name.Contains("Boss Fight") && (transform.position.x > 1.85f || transform.position.x < -2.2f)))
                 {
-                    facingRight = false;
-                    rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x - acceleration, -maxspeed, maxspeed), rb.velocity.y);
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        facingRight = false;
+                        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x - acceleration, -maxspeed, maxspeed), rb.velocity.y);
+                    }
+                    else if (Input.GetKey(KeyCode.D))
+                    {
+                        facingRight = true;
+                        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x + acceleration, -maxspeed, maxspeed), rb.velocity.y);
+                    }
                 }
-                else if (Input.GetKey(KeyCode.D))
+                else if((transform.position.x > 1.85f))
                 {
-                    facingRight = true;
-                    rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x + acceleration, -maxspeed, maxspeed), rb.velocity.y);
+                    transform.position = (Vector2)(transform.position) + -Vector2.right * 0.025f;
+                }
+                else
+                {
+                    transform.position = (Vector2)(transform.position) + Vector2.right * 0.025f;
                 }
                 if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpbuffered) //player wants to jump, is grounded and hasnt just jumped (buffer stops jumping during jump takeoff)
                 {
@@ -209,7 +223,9 @@ public class PlayerControls : MonoBehaviour
             else if (string.Equals(waitid, "fire"))//start fire 
             {
                 firebuffered = false;
+                Cursor.SetCursor(MouseCursor[1].texture, Vector2.zero, CursorMode.ForceSoftware);
                 yield return new WaitForSeconds(waittime);
+                Cursor.SetCursor(MouseCursor[0].texture, Vector2.zero, CursorMode.ForceSoftware);
                 firebuffered = true;
             }
             else if (string.Equals(waitid, "invincible"))//start invincible

@@ -23,7 +23,6 @@ public class Environmentals : MonoBehaviour {
             switch (gameObject.name)
             {
                 case "Ladder":
-                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                     if (collision.gameObject.transform.position.y < transform.position.y)
                     {
                         up = true;
@@ -31,6 +30,19 @@ public class Environmentals : MonoBehaviour {
                     else
                     {
                         up = false;
+                    }
+                    if (gameObject.name == "Ladder" && collision.gameObject.name.Contains("Player"))
+                    {
+                        var velo = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+                        if (up)
+                        {
+                            velo.y = 4;
+                        }
+                        else
+                        {
+                            velo.y = -4;
+                        }
+                        collision.gameObject.GetComponent<Rigidbody2D>().velocity = velo;
                     }
                     break;
                 case "Chest":
@@ -73,22 +85,6 @@ public class Environmentals : MonoBehaviour {
                     StartCoroutine(SignText());
                     break;
             }
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(gameObject.name == "Ladder" && collision.gameObject.name.Contains("Player"))
-        {
-            var velo = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
-            if (up)
-            {
-                velo.y = 1;
-            }
-            else
-            {
-                velo.y = -1;
-            }
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = velo;
         }
     }
     private IEnumerator SignText()
